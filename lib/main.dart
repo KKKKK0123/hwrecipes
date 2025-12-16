@@ -21,10 +21,8 @@ class RecipeApp extends StatelessWidget {
         primaryColor: primaryColor,
         scaffoldBackgroundColor: primaryColor,
 
-        // ⭐ ใช้ Oswald ทั้งแอป
         textTheme: GoogleFonts.oswaldTextTheme(),
 
-        // ⭐ ตั้งค่า AppBar ทีเดียว
         appBarTheme: AppBarTheme(
           backgroundColor: primaryColor,
           centerTitle: true,
@@ -53,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title), // ใช้ Oswald จาก theme
+        title: Text(widget.title), 
       ),
       body: SafeArea(
         child: ListView.builder(
@@ -101,7 +99,18 @@ Widget buildRecipeCard(Recipe recipe) {
           const SizedBox(height: 12),
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(recipe.imgUrl),
+            child: Image.asset(
+              recipe.imgUrl,
+              width: double.infinity,
+              height: 180,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => Container(
+                width: double.infinity,
+                height: 180,
+                color: Colors.grey[200],
+                child: const Icon(Icons.broken_image, size: 48, color: Colors.grey),
+              ),
+            ),
           ),
         ],
       ),
